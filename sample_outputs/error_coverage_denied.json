@@ -1,0 +1,30 @@
+{
+  "call_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "transcript": [
+    {"role": "agent", "text": "Thank you for calling Smile Dental Care! How can I help you today?", "ts": "2026-03-06T11:00:00.000Z"},
+    {"role": "user", "text": "Hi, I have Cigna DPPO insurance and I'd like to schedule a cleaning.", "ts": "2026-03-06T11:00:04.000Z"},
+    {"role": "agent", "text": "I'd be happy to help. Let me check your Cigna DPPO coverage for a cleaning.", "ts": "2026-03-06T11:00:07.000Z"},
+    {"role": "agent", "text": "I'm sorry, but cleanings are not covered under your Cigna DPPO plan. However, we do offer a cash-pay option at $150 for a cleaning. Would you like to go ahead and schedule at that rate, or would you prefer to leave a message for our billing department?", "ts": "2026-03-06T11:00:12.000Z"},
+    {"role": "user", "text": "No thank you, I'll check with my insurance company first and call back.", "ts": "2026-03-06T11:00:18.000Z"},
+    {"role": "agent", "text": "Absolutely, no problem at all. If you have any questions when you call back, we're here to help. Have a great day!", "ts": "2026-03-06T11:00:21.000Z"}
+  ],
+  "intents": ["coverage_check"],
+  "slots": {
+    "payer": "Cigna",
+    "plan": "DPPO"
+  },
+  "tool_trace": [
+    {
+      "tool": "check_insurance_coverage",
+      "input": {"payer": "Cigna", "plan": "DPPO", "procedure_code": "D1110", "dob": null},
+      "output": {"covered": false, "copay_estimate": 0, "notes": "Procedure not covered under this plan."},
+      "ok": true,
+      "ts": "2026-03-06T11:00:08.345Z"
+    }
+  ],
+  "outcome": {
+    "booked": false,
+    "coverage_denied": true,
+    "next_steps": "none"
+  }
+}

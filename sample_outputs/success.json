@@ -1,0 +1,62 @@
+{
+  "call_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "transcript": [
+    {"role": "agent", "text": "Thank you for calling Smile Dental Care! How can I help you today?", "ts": "2026-03-06T10:00:00.000Z"},
+    {"role": "user", "text": "Hi, I'm Maya Patel. Do you take Delta Dental PPO for a cleaning? If yes, next Tuesday morning in San Jose. My number is 408-555-1234.", "ts": "2026-03-06T10:00:05.000Z"},
+    {"role": "agent", "text": "Hi Maya! Let me check your Delta Dental PPO coverage for a cleaning right away.", "ts": "2026-03-06T10:00:08.000Z"},
+    {"role": "agent", "text": "Great news! Your cleaning is covered with a $25 copay. Let me find available slots for next Tuesday morning at our San Jose location.", "ts": "2026-03-06T10:00:12.000Z"},
+    {"role": "agent", "text": "I have openings at 9 AM, 10 AM, and 11 AM next Tuesday with Dr. Sarah Chen. Which works best for you?", "ts": "2026-03-06T10:00:16.000Z"},
+    {"role": "user", "text": "9 AM sounds great.", "ts": "2026-03-06T10:00:20.000Z"},
+    {"role": "agent", "text": "Perfect. Let me confirm: Maya Patel, cleaning at 9 AM next Tuesday at our San Jose office with Dr. Chen, phone number +1-408-555-1234. Shall I go ahead and book this?", "ts": "2026-03-06T10:00:23.000Z"},
+    {"role": "user", "text": "Yes, please.", "ts": "2026-03-06T10:00:27.000Z"},
+    {"role": "agent", "text": "You're all booked! Your confirmation number is NRH-A3F2B8C1. I'm sending a confirmation text to your phone now. Your copay will be $25. Is there anything else I can help with?", "ts": "2026-03-06T10:00:32.000Z"},
+    {"role": "user", "text": "No, that's all. Thank you!", "ts": "2026-03-06T10:00:36.000Z"},
+    {"role": "agent", "text": "You're welcome, Maya! See you next Tuesday. Have a wonderful day!", "ts": "2026-03-06T10:00:38.000Z"}
+  ],
+  "intents": ["coverage_check", "check_availability", "book_appointment", "send_sms"],
+  "slots": {
+    "patient_first": "Maya",
+    "patient_last": "Patel",
+    "phone": "+14085551234",
+    "appointment_type": "cleaning",
+    "time_pref": "2026-03-10T09:00:00",
+    "location_id": "LOC001",
+    "payer": "Delta Dental",
+    "plan": "PPO"
+  },
+  "tool_trace": [
+    {
+      "tool": "check_insurance_coverage",
+      "input": {"payer": "Delta Dental", "plan": "PPO", "procedure_code": "D1110", "dob": null},
+      "output": {"covered": true, "copay_estimate": 25, "notes": "Covered under preventive care. One cleaning per 6 months."},
+      "ok": true,
+      "ts": "2026-03-06T10:00:09.123Z"
+    },
+    {
+      "tool": "get_provider_availability",
+      "input": {"location_id": "LOC001", "provider_id": "PROV001", "date_range": {"start": "2026-03-10", "end": "2026-03-10"}, "appointment_type": "cleaning"},
+      "output": {"slots": [{"start": "2026-03-10T09:00:00", "end": "2026-03-10T10:00:00"}, {"start": "2026-03-10T10:00:00", "end": "2026-03-10T11:00:00"}, {"start": "2026-03-10T11:00:00", "end": "2026-03-10T12:00:00"}]},
+      "ok": true,
+      "ts": "2026-03-06T10:00:13.456Z"
+    },
+    {
+      "tool": "book_appointment",
+      "input": {"patient": {"first": "Maya", "last": "Patel", "phone": "+14085551234"}, "provider_id": "PROV001", "slot": {"start": "2026-03-10T09:00:00", "end": "2026-03-10T10:00:00"}, "appointment_type": "cleaning", "location_id": "LOC001", "idempotency_key": "d290f1ee-6c54-4b01-90e6-d701748f0851"},
+      "output": {"confirmation_id": "NRH-A3F2B8C1", "status": "booked"},
+      "ok": true,
+      "ts": "2026-03-06T10:00:28.789Z"
+    },
+    {
+      "tool": "send_sms",
+      "input": {"to": "+14085551234", "message": "Your cleaning at Smile Dental Care San Jose is confirmed for Tue Mar 10 at 9:00 AM with Dr. Sarah Chen. Confirmation: NRH-A3F2B8C1. Copay: $25."},
+      "output": {"queued": true, "message_id": "SMS-F8E2A1B3"},
+      "ok": true,
+      "ts": "2026-03-06T10:00:30.012Z"
+    }
+  ],
+  "outcome": {
+    "booked": true,
+    "confirmation_id": "NRH-A3F2B8C1",
+    "next_steps": "SMS sent"
+  }
+}

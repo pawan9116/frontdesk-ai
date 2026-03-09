@@ -1,0 +1,14 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.git/
+.DS_Store
+data/*.db
+tests/
+session_reports/
+sample_outputs/
+*.log
+DESIGN.md
+README.md

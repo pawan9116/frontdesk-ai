@@ -1,0 +1,7 @@
+{
+  "id": "receptionist",
+  "version": "1.3.0",
+  "description": "Front-office receptionist for healthcare practices",
+  "model": "gpt-4o-mini",
+  "updated_at": "2026-03-09"
+}
