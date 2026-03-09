@@ -36,7 +36,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: Deploy MCP Server
-        run: railway up --service mcp-server --dockerfile Dockerfile.mcp --detach
+        run: railway up --service mcp-server --detach
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
@@ -52,7 +52,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: Deploy Agent
-        run: railway up --service agent --dockerfile Dockerfile --detach
+        run: railway up --service agent --detach
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
