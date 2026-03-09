@@ -27,7 +27,6 @@ from livekit.agents import (
 )
 from livekit.agents import inference
 from livekit.plugins import openai, silero
-from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 # Add src to path for local imports
 sys.path.insert(0, os.path.dirname(__file__))
@@ -106,7 +105,7 @@ async def entrypoint(ctx: JobContext) -> None:
         stt=inference.STT(model="deepgram/nova-3", language="en"),
         llm=openai.LLM(model="gpt-4o-mini"),
         tts=openai.TTS(),
-        turn_detection=MultilingualModel(),
+        turn_detection="vad",
         mcp_servers=[
             mcp.MCPServerHTTP(url=MCP_SERVER_URL),
         ],
