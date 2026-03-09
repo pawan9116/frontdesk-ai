@@ -19,7 +19,7 @@ See [DESIGN.md](DESIGN.md) for detailed architecture and tradeoffs.
 
 | Item | Value |
 |------|-------|
-| **Phone Number** | `+1 (xxx) xxx-xxxx` *(update after provisioning)* |
+| **Phone Number** | `+1 (501) 476-2841` |
 | **Passcode** | None (Twilio trial: press any key after the trial message) |
 | **Test Window** | Sat-Sun, 10 AM - 6 PM PST |
 | **Try saying** | "Hi, I'm Maya Patel. Do you take Delta Dental PPO for a cleaning? Next Tuesday morning in San Jose. My number is 408-555-1234." |
